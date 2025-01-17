@@ -1,0 +1,280 @@
+
+R version 4.4.2 (2024-10-31 ucrt) -- "Pile of Leaves"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> file_path <- "C:/Users/ruth.olusanya/Downloads/SUB LGA Analysis.xlsx"
+> customer_data <- read_excel(file_path, sheet = "BILLED")
+Error in read_excel(file_path, sheet = "BILLED") : 
+  could not find function "read_excel"
+> library(readxl)
+> file_path <- "C:/Users/ruth.olusanya/Downloads/SUB LGA Analysis.xlsx"
+> customer_data <- read_excel(file_path, sheet = "BILLED")
+-\                                                                              /                                                                              -|                                                                              > head(customer_data)
+# A tibble: 6 × 7
+  Brand  Branch  Customer_Phone STATE              LGA      LATITUDE LONGITUDE
+  <chr>  <chr>            <dbl> <chr>              <chr>       <dbl>     <dbl>
+1 ADDMIE CENTRAL     7010113138 Abuja Fed. Capital Mpape        9.15      7.31
+2 ADDMIE CENTRAL     7011079820 Abuja Fed. Capital Bwari        7.81      6.74
+3 ADDMIE CENTRAL     7013899473 Abuja Fed. Capital Wuse         9.07      7.47
+4 ADDMIE CENTRAL     7014999435 Nasarawa           Gwarimpa     9.11      7.37
+5 ADDMIE CENTRAL     7015981502 Abuja Fed. Capital Garki        9.02      7.49
+6 ADDMIE CENTRAL     7016191784 Abuja Fed. Capital Karu         9.01      7.58
+> library(shiny)
+Error: package or namespace load failed for ‘shiny’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘promises’
+> install.packages("shiny")
+--- Please select a CRAN mirror for use in this session ---
+also installing the dependencies ‘promises’, ‘bslib’
+
+trying URL 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/promises_1.3.2.zip'
+Content type 'application/zip' length 2016370 bytes (1.9 MB)
+downloaded 1.9 MB
+
+trying URL 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/bslib_0.8.0.zip'
+Content type 'application/zip' length 5596443 bytes (5.3 MB)
+downloaded 5.3 MB
+
+trying URL 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/shiny_1.9.1.zip'
+Content type 'application/zip' length 5088164 bytes (4.9 MB)
+downloaded 2.8 MB
+
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/shiny_1.9.1.zip' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 2883584 != reported length 5088164
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/shiny_1.9.1.zip': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘shiny’ failed
+package ‘promises’ successfully unpacked and MD5 sums checked
+package ‘bslib’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\ruth.olusanya\AppData\Local\Temp\Rtmp4kL5X0\downloaded_packages
+> 
+> library(leaflet)
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> ui <- fluidPage(
++   titlePanel("Customer Locations in Nigeria")
++ sidebarLayout(
+Error: unexpected symbol in:
+"  titlePanel("Customer Locations in Nigeria")
+sidebarLayout"
+>     sidebarPanel(
++       selectInput("brand_filter", "Select Brand:", 
++                   choices = c("All", unique(customer_data$Brand))),
++       selectInput("lga_filter", "Select Local Government Area:", 
++                   choices = c("All", unique(customer_data$LGA))),
++       selectInput("branch_filter", "Select Branch:", 
++                   choices = c("All", unique(customer_data$Branch))),
++       actionButton("apply_filters", "Apply Filters")
++     ),
+Error: unexpected ',' in:
+"      actionButton("apply_filters", "Apply Filters")
+    ),"
+>     # Main panel for map
+>     mainPanel(
++       leafletOutput("map", height = 600)
++     )
+Error in mainPanel(leafletOutput("map", height = 600)) : 
+  could not find function "mainPanel"
+>   )
+Error: unexpected ')' in "  )"
+> )
+Error: unexpected ')' in ")"
+>  install.packages("shiny")
+trying URL 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/shiny_1.9.1.zip'
+Content type 'application/zip' length 5088164 bytes (4.9 MB)
+downloaded 4.6 MB
+
+Error in download.file(url, destfile, method, mode = "wb", ...) : 
+  download from 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/shiny_1.9.1.zip' failed
+In addition: Warning messages:
+1: In download.file(url, destfile, method, mode = "wb", ...) :
+  downloaded length 4849664 != reported length 5088164
+2: In download.file(url, destfile, method, mode = "wb", ...) :
+  URL 'https://cran.ma.imperial.ac.uk/bin/windows/contrib/4.4/shiny_1.9.1.zip': Timeout of 60 seconds was reached
+Warning in download.packages(pkgs, destdir = tmpd, available = available,  :
+  download of package ‘shiny’ failed
+> options(repos = c(CRAN = "https://cloud.r-project.org"))
+> install.packages("shiny")
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.4/shiny_1.9.1.zip'
+Content type 'application/zip' length 5088164 bytes (4.9 MB)
+downloaded 4.9 MB
+
+package ‘shiny’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\ruth.olusanya\AppData\Local\Temp\Rtmp4kL5X0\downloaded_packages
+> ui <- fluidPage(
++   titlePanel("Customer Locations in Nigeria"),
++   # Sidebar for filters
++   sidebarLayout(
++     sidebarPanel(
++       selectInput("brand_filter", "Select Brand:", 
++                   choices = c("All", unique(customer_data$Brand))),
++       selectInput("lga_filter", "Select Local Government Area:", 
++                   choices = c("All", unique(customer_data$LGA))),
++       selectInput("branch_filter", "Select Branch:", 
++                   choices = c("All", unique(customer_data$Branch))),
++       actionButton("apply_filters", "Apply Filters")
++     ),
++     # Main panel for map
++     mainPanel(
++       leafletOutput("map", height = 600)
++     )
++   )
++ )
+Error in fluidPage(titlePanel("Customer Locations in Nigeria"), sidebarLayout(sidebarPanel(selectInput("brand_filter",  : 
+  could not find function "fluidPage"
+> library(shiny)
+> Error in fluidPage(titlePanel("Customer Locations in Nigeria"), sidebarLayout(sidebarPanel(selectInput("brand_filter",  : 
+Error: unexpected 'in' in "Error in"
+>   could not find function "fluidPage"
+Error: unexpected symbol in "  could not"
+> ui <- fluidPage(
++ +   titlePanel("Customer Locations in Nigeria"),
++ +   # Sidebar for filters
++ +   sidebarLayout(
++ +     sidebarPanel(
++ +       selectInput("brand_filter", "Select Brand:", 
++ +                   choices = c("All", unique(customer_data$Brand))),
+Error: unexpected '=' in:
+"+       selectInput("brand_filter", "Select Brand:", 
++                   choices ="
+> +       selectInput("lga_filter", "Select Local Government Area:", 
++ +                   choices = c("All", unique(customer_data$LGA))),
+Error: unexpected '=' in:
+"+       selectInput("lga_filter", "Select Local Government Area:", 
++                   choices ="
+> +       selectInput("branch_filter", "Select Branch:", 
++ +                   choices = c("All", unique(customer_data$Branch))),
+Error: unexpected '=' in:
+"+       selectInput("branch_filter", "Select Branch:", 
++                   choices ="
+> +       actionButton("apply_filters", "Apply Filters")
+Error in +actionButton("apply_filters", "Apply Filters") : 
+  invalid argument to unary operator
+> +     ),
+Error: unexpected ')' in "+     )"
+> +     # Main panel for map
++ +     mainPanel(
++ +       leafletOutput("map", height = 600)
++ +     )
+Error: unexpected ')' in:
+"+       leafletOutput("map", height = 600)
++     )"
+> +   )
+Error: unexpected ')' in "+   )"
+> + )
+Error: unexpected ')' in "+ )"
+> ui <- fluidPage(
++   titlePanel("Customer Locations in Nigeria"),
++ sidebarLayout(
++     sidebarPanel(
++       selectInput("brand_filter", "Select Brand:", 
++                   choices = c("All", unique(customer_data$Brand)))
++ selectInput("lga_filter", "Select Local Government Area:", 
+Error: unexpected symbol in:
+"                  choices = c("All", unique(customer_data$Brand)))
+selectInput"
+>                   choices = c("All", unique(customer_data$LGA))),
+Error: unexpected ')' in "                  choices = c("All", unique(customer_data$LGA)))"
+>       selectInput("branch_filter", "Select Branch:", 
++                   choices = c("All", unique(customer_data$Branch))),
+Error: unexpected ',' in:
+"      selectInput("branch_filter", "Select Branch:", 
+                  choices = c("All", unique(customer_data$Branch))),"
+>       actionButton("apply_filters", "Apply Filters")
+<button id="apply_filters" type="button" class="btn btn-default action-button">Apply Filters</button>
+>     )
+Error: unexpected ')' in "    )"
+> ui <- fluidPage(
++   titlePanel("Customer Locations in Nigeria"),
++   # Sidebar for filters
++   sidebarLayout(
++     sidebarPanel(
++       selectInput("brand_filter", "Select Brand:", 
++                   choices = c("All", unique(customer_data$Brand))),
++       selectInput("lga_filter", "Select Local Government Area:", 
++                   choices = c("All", unique(customer_data$LGA))),
++       selectInput("branch_filter", "Select Branch:", 
++                   choices = c("All", unique(customer_data$Branch))),
++       actionButton("apply_filters", "Apply Filters")
++     ),
++     # Main panel for map
++     mainPanel(
++       leafletOutput("map", height = 600)
++     )
++   )
++ )
+> server <- function(input, output, session) {
++   # Reactive data based on filters
++   filtered_data <- reactive({
++     req(input$apply_filters)
++     data <- customer_data
++     if (input$brand_filter != "All") {
++       data <- data %>% filter(Brand == input$brand_filter)
++     }
++     if (input$lga_filter != "All") {
++       data <- data %>% filter(LGA == input$lga_filter)
++     }
++     if (input$branch_filter != "All") {
++       data <- data %>% filter(Branch == input$branch_filter)
++     }
++     data
++   })
++ output$map <- renderLeaflet({
++     leaflet() %>%
++       addTiles() %>%
++       setView(lng = 8.6753, lat = 9.0820, zoom = 4)  # Center map on Nigeria
++   })
++ observeEvent(filtered_data(), {
++     data <- filtered_data()
++ leafletProxy("map") %>%
++       clearMarkers() %>%
++       addCircleMarkers(
++         data = data,
++         lng = ~LONGITUDE,
++         lat = ~LATITUDE,
++         popup = ~paste("<strong>Brand:</strong>", Brand, 
++                        "<br><strong>Branch:</strong>", Branch, 
++                        "<br><strong>LGA:</strong>", LGA),
++         radius = 5,
++         color = "blue",
++         stroke = FALSE,
++         fillOpacity = 0.8
++       )
++   })
++ }
+> shinyApp(ui, server)
+
+Listening on http://127.0.0.1:7965
+
